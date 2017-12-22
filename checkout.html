@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <div>
+            <input type="radio" name="creditcard" checked="checked" class="creditcard">
+            <label>Credit card</label>
+            <div class="creditform">
+                <label> credit card number</label> <br />
+                <input type="text" name="number">
+            </div>
+        </div>
+
+        <div>
+            <input type="radio" name="paypal" class="paypal">
+            <label>Paypal</label>
+            <div class="paypalform" style="display: none">
+                <label>Paypal id</label> <br />
+                <input type="text" name="paypalid">
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <div>
+        <div class="address">
+            <div>FirstName<input type="text" name="FirstName" id="FirstName"></div><br>
+            <div>LastName<input type="text" name="LastName" id="LastName"></div><br>
+            <div>EmailAddress<input type="text" name="EmailAddress" id="EmailAddress"></div><br>
+            <div>BillingAddress<input type="text" name="ShippingAddress" id="ShippingAddress"  onblur="$('#BillingAddress').val($('#ShippingAddress').val());" ></div><br>
+            <div>BillingZip<input type="text" name="ShippingZip" id="ShippingZip"  onkeyup="shipzip()" ></div><br>
+            <div>BillingCity
+                <select name="ShippingCity" id="ShippingCity"  onchange="shipcity()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                </div><br>
+            <div>BillingState<input type="text" name="ShippingState" id="ShippingState"  onblur="$('#ShippingState').val($('#BillingState').val());" ></div><br>
+            <div>BillingCountry<input type="text" name="ShippingCountry" id="ShippingCountry"  onblur="$('#ShippingCountry').val($('#BillingCountry').val());" ></div><br>
+        </div>
+        <br>
+        <input type="checkbox" name="address" class="address">
+        <label>i have diff addresss</label>
+        <div class="addressform" style="display: none">
+            <br>
+            <div>ShippingAddress<input type="text" name="BillingAddress" id="BillingAddress"></div><br>
+            <div>ShippingZip<input type="text" name="BillingZip" id="BillingZip" ></div><br>
+            <div>
+                ShippingCity
+                <select name="BillingCity" id="BillingCity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div><br>
+            <div>ShippingState<input type="text" name="BillingState" id="BillingState"></div><br>
+            <div>ShippingCountry<input type="text" name="BillingCountry" id="BillingCountry"></div><br>
+        </div>
+        <br>
+        <br>
+        <div>ShippingInstructions<input type="text" name="ShippingInstructions" id="ShippingInstructions"></div><br>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(".address").change(function() {
+        if(this.checked) {
+            $(".addressform").show();
+            $('#BillingAddress').val('');
+            $('#BillingZip').val('');
+            $('#BillingCity').val('');
+            $('#BillingState').val('');
+            $('#BillingCountry').val('');
+        }else {
+            $(".addressform").hide();
+            $('#BillingAddress').val($('#ShippingAddress').val());
+//            $('#BillingZip').val($('#ShippingZip').val());
+            $('#BillingCity').val($('#ShippingCity').val());
+            $('#BillingState').val($('#ShippingState').val());
+            $('#BillingCountry').val($('#ShippingCountry').val());
+        }
+    });
+
+    function shipzip() {
+
+        var shipcode = $('#ShippingZip').val();
+        $('#BillingZip').val(shipcode);
+
+        //$('#ShippingState').val($('#BillingState').val());
+        //$('#BillingAddress').val($('#ShippingAddress').val());
+    }
+    function shipcity() {
+        var billcity =  $('#ShippingCity').val();
+        $("#BillingCity").val(billcity);
+    }
+
+</script>
+
+
+
+
+
+
+<script>
+    $(".paypal").change(function() {
+        if(this.checked) {
+            $(".creditform").hide();
+            $(".paypalform").show();
+            $('.creditcard').prop('checked', false);
+        }
+    });
+    $(".creditcard").change(function() {
+        if(this.checked) {
+            $(".creditform").show();
+            $(".paypalform").hide();
+            $('.paypal').prop('checked', false);
+        }else{
+            alert('afasdfgsde');
+        }
+    });
+</script>
+</body>
+</html>
